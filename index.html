@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RACCA — Relations Économiques Canada-Caraïbes-Afrique</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Grotesk:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rouge: #D32252;
+    --gris: #363336;
+    --beige: #F8F5F1;
+    --gris-pale: #EAEAEA;
+    --rouge-light: rgba(211, 34, 82, 0.08);
+    --rouge-mid: rgba(211, 34, 82, 0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--beige);
+    color: var(--gris);
+    overflow-x: hidden;
+  }
+
+  /* ── LANG TOGGLE ── */
+  .lang-bar {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 14px 48px;
+    background: var(--beige);
+    border-bottom: 1px solid var(--gris-pale);
+  }
+  .lang-bar .logo-top {
+    margin-right: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--gris);
+    text-transform: uppercase;
+  }
+  .lang-bar .logo-top span { color: var(--rouge); }
+  .lang-toggle {
+    display: flex; gap: 6px; align-items: center;
+  }
+  .lang-btn {
+    background: none;
+    border: 1px solid transparent;
+    padding: 5px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--gris);
+    transition: all 0.25s;
+    border-radius: 2px;
+  }
+  .lang-btn.active {
+    border-color: var(--rouge);
+    color: var(--rouge);
+    background: var(--rouge-light);
+  }
+  .lang-btn:hover:not(.active) { border-color: var(--gris-pale); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 100px 56px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-eyebrow .line {
+    width: 36px; height: 1px;
+    background: var(--rouge);
+  }
+  .hero-eyebrow span {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    font-weight: 500;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--gris);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.35s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(54,51,54,0.72);
+    max-width: 440px;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.65s forwards;
+  }
+  .btn-primary {
+    background: var(--rouge);
+    color: #fff;
+    border: none;
+    padding: 15px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #b81c45; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--gris);
+    border: 1px solid var(--gris);
+    padding: 15px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--rouge); color: var(--rouge); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--gris);
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(211,34,82,0.04) 40px,
+        rgba(211,34,82,0.04) 41px
+      );
+    z-index: 1;
+  }
+  .hero-map {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeIn 1.4s ease 0.4s forwards;
+  }
+
+  /* Decorative geometric — SVG map placeholder */
+  .geo-diagram {
+    width: 80%;
+    max-width: 440px;
+  }
+
+  /* ── TERRITORIES STRIP ── */
+  .territories {
+    background: var(--rouge);
+    padding: 18px 80px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+  }
+  .territories .terr-item {
+    flex: 1;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .territories .sep {
+    color: rgba(255,255,255,0.35);
+    font-size: 1.4rem;
+    font-weight: 100;
+  }
+
+  /* ── SECTION COMMON ── */
+  section {
+    padding: 120px 80px;
+  }
+  .section-label {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .section-label .line { width: 28px; height: 1px; background: var(--rouge); }
+  .section-label span {
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--rouge); font-weight: 500;
+  }
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: rgba(54,51,54,0.25);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  /* ── MISSION ── */
+  .mission-section {
+    background: var(--beige);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .mission-heading {
+    position: sticky;
+    top: 100px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--gris);
+    margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--rouge); }
+  .accent-bar {
+    width: 44px; height: 2px;
+    background: var(--rouge);
+    margin-top: 20px;
+  }
+  .mission-body p {
+    font-size: 1.08rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(54,51,54,0.82);
+    margin-bottom: 28px;
+  }
+  .mission-body p:last-child { margin-bottom: 0; }
+
+  /* Highlight quote block */
+  .mission-highlight {
+    border-left: 2px solid var(--rouge);
+    padding: 20px 28px;
+    background: var(--rouge-light);
+    margin: 40px 0;
+  }
+  .mission-highlight p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gris) !important;
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+
+  /* ── VISION ── */
+  .vision-section {
+    background: var(--gris);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .vision-body p {
+    font-size: 1.08rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(248,245,241,0.75);
+    margin-bottom: 28px;
+  }
+  .vision-body p:last-child { margin-bottom: 0; }
+  .vision-section .section-title { color: var(--beige); }
+  .vision-section .section-label span { color: rgba(211,34,82,0.9); }
+  .vision-section .section-number { color: rgba(248,245,241,0.2); }
+  .vision-aside {
+    position: sticky;
+    top: 100px;
+  }
+  .vision-stat {
+    border-top: 1px solid rgba(248,245,241,0.12);
+    padding: 28px 0;
+  }
+  .vision-stat:first-child { border-top: none; padding-top: 0; }
+  .vision-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--rouge);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .vision-stat .label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(248,245,241,0.45);
+    font-weight: 400;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-section {
+    background: var(--gris-pale);
+    padding: 120px 80px;
+  }
+  .pillars-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 72px;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .pillar-card {
+    background: #fff;
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pillar-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--rouge);
+    transform: scaleX(0);
+    transition: transform 0.35s ease;
+    transform-origin: left;
+  }
+  .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(54,51,54,0.08); }
+  .pillar-card:hover::after { transform: scaleX(1); }
+  .pillar-icon {
+    width: 44px; height: 44px;
+    background: var(--rouge-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+  }
+  .pillar-icon svg { width: 20px; height: 20px; stroke: var(--rouge); fill: none; stroke-width: 1.5; }
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gris);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .pillar-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(54,51,54,0.65);
+    font-weight: 300;
+  }
+  .pillar-num {
+    position: absolute;
+    top: 28px; right: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(54,51,54,0.05);
+    line-height: 1;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--rouge);
+    padding: 80px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .cta-band-text .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 12px;
+  }
+  .cta-band-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.15;
+  }
+  .btn-white {
+    background: #fff;
+    color: var(--rouge);
+    border: none;
+    padding: 17px 44px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-white:hover { background: var(--beige); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gris);
+    padding: 60px 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--beige);
+    margin-bottom: 16px;
+  }
+  .footer-logo span { color: var(--rouge); }
+  .footer-tagline {
+    font-size: 0.82rem;
+    color: rgba(248,245,241,0.4);
+    line-height: 1.7;
+  }
+  .footer-col h4 {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248,245,241,0.4);
+    margin-bottom: 20px;
+  }
+  .footer-col p, .footer-col a {
+    font-size: 0.88rem;
+    color: rgba(248,245,241,0.65);
+    line-height: 1.8;
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--rouge); }
+  .footer-bottom {
+    border-top: 1px solid rgba(248,245,241,0.08);
+    margin-top: 48px;
+    padding-top: 24px;
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 0.75rem;
+    color: rgba(248,245,241,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 80px 32px 60px; }
+    .hero-right { height: 300px; }
+    section, .pillars-section, .cta-band, footer { padding: 72px 32px; }
+    .mission-section, .vision-section { grid-template-columns: 1fr; gap: 48px; }
+    .mission-heading, .vision-aside { position: static; }
+    .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
+    .pillars-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .territories { padding: 16px 24px; gap: 4px; }
+    .cta-band { flex-direction: column; align-items: flex-start; }
+    footer { grid-template-columns: 1fr; gap: 36px; }
+    .lang-bar { padding: 12px 24px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+
+  /* ── BILINGUAL CONTENT ── */
+  [data-lang="en"] { display: none; }
+  body.lang-en [data-lang="fr"] { display: none; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-en [data-lang="en"].inline { display: inline; }
+  [data-lang="fr"].inline { display: inline; }
+  body.lang-en span[data-lang="fr"] { display: none; }
+  body.lang-en span[data-lang="en"] { display: inline; }
+  span[data-lang="en"] { display: none; }
+</style>
+</head>
+<body class="lang-fr">
+
+<!-- LANG BAR -->
+<header class="lang-bar">
+  <div class="logo-top"><span>R</span>ACCA</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="line"></div>
+      <span data-lang="fr">Relations Économiques Transnationales</span>
+      <span data-lang="en">Transnational Economic Relations</span>
+    </div>
+    <h1 class="hero-title">
+      <span data-lang="fr">Tisser les<br><em>corridors</em><br>de demain</span>
+      <span data-lang="en">Weaving<br>tomorrow's<br><em>corridors</em></span>
+    </h1>
+    <p class="hero-subtitle">
+      <span data-lang="fr">La RACCA connecte le Canada, les Caraïbes et l'Afrique à travers un écosystème de dialogue stratégique, d'investissement et de leadership à fort impact.</span>
+      <span data-lang="en">RACCA connects Canada, the Caribbean and Africa through an ecosystem of strategic dialogue, investment and high-impact leadership.</span>
+    </p>
+    <div class="hero-cta">
+      <a href="#mission" class="btn-primary">
+        <span data-lang="fr">Notre Mission</span>
+        <span data-lang="en">Our Mission</span>
+      </a>
+      <a href="#vision" class="btn-outline">
+        <span data-lang="fr">Notre Vision</span>
+        <span data-lang="en">Our Vision</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-map">
+      <!-- Decorative SVG geometric abstraction of the three continents/regions -->
+      <svg class="geo-diagram" viewBox="0 0 440 480" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- Background circles -->
+        <circle cx="220" cy="240" r="200" stroke="rgba(248,245,241,0.04)" stroke-width="1"/>
+        <circle cx="220" cy="240" r="150" stroke="rgba(248,245,241,0.06)" stroke-width="1"/>
+        <circle cx="220" cy="240" r="100" stroke="rgba(248,245,241,0.08)" stroke-width="1"/>
+        <!-- CANADA node -->
+        <circle cx="120" cy="100" r="48" fill="rgba(211,34,82,0.12)" stroke="#D32252" stroke-width="1"/>
+        <circle cx="120" cy="100" r="8" fill="#D32252"/>
+        <text x="120" y="162" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" fill="rgba(248,245,241,0.6)" letter-spacing="2">CANADA</text>
+        <!-- CARIBBEAN node -->
+        <circle cx="300" cy="190" r="38" fill="rgba(211,34,82,0.08)" stroke="#D32252" stroke-width="1" stroke-dasharray="4 3"/>
+        <circle cx="300" cy="190" r="8" fill="#D32252"/>
+        <text x="300" y="244" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" fill="rgba(248,245,241,0.6)" letter-spacing="2">CARAÏBES</text>
+        <!-- AFRICA node -->
+        <circle cx="180" cy="360" r="54" fill="rgba(211,34,82,0.1)" stroke="#D32252" stroke-width="1"/>
+        <circle cx="180" cy="360" r="8" fill="#D32252"/>
+        <text x="180" y="428" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" fill="rgba(248,245,241,0.6)" letter-spacing="2">AFRIQUE</text>
+        <!-- Connecting lines -->
+        <line x1="120" y1="100" x2="300" y2="190" stroke="rgba(211,34,82,0.35)" stroke-width="1" stroke-dasharray="6 4"/>
+        <line x1="300" y1="190" x2="180" y2="360" stroke="rgba(211,34,82,0.35)" stroke-width="1" stroke-dasharray="6 4"/>
+        <line x1="120" y1="100" x2="180" y2="360" stroke="rgba(211,34,82,0.35)" stroke-width="1" stroke-dasharray="6 4"/>
+        <!-- Center intersection -->
+        <circle cx="205" cy="220" r="14" fill="rgba(211,34,82,0.2)" stroke="#D32252" stroke-width="1"/>
+        <circle cx="205" cy="220" r="5" fill="#D32252"/>
+        <!-- RACCA label -->
+        <text x="225" y="218" font-family="Cormorant Garamond, serif" font-size="11" fill="#D32252" letter-spacing="2" font-style="italic">RACCA</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- TERRITORIES STRIP -->
+<div class="territories">
+  <div class="terr-item">
+    <span data-lang="fr">Canada</span>
+    <span data-lang="en">Canada</span>
+  </div>
+  <div class="sep">×</div>
+  <div class="terr-item">
+    <span data-lang="fr">Caraïbes</span>
+    <span data-lang="en">Caribbean</span>
+  </div>
+  <div class="sep">×</div>
+  <div class="terr-item">
+    <span data-lang="fr">Afrique</span>
+    <span data-lang="en">Africa</span>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section id="mission" class="mission-section">
+  <div class="mission-heading reveal">
+    <div class="section-number">01</div>
+    <div class="section-label">
+      <div class="line"></div>
+      <span data-lang="fr">Mission</span>
+      <span data-lang="en">Mission</span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="fr">Mission<br>de la<br><em>RACCA</em></span>
+      <span data-lang="en">RACCA's<br><em>Mission</em></span>
+    </h2>
+    <div class="accent-bar"></div>
+  </div>
+  <div class="mission-body reveal">
+    <p data-lang="fr">La RACCA a pour mission de renforcer les relations économiques, entrepreneuriales, institutionnelles et d'investissement entre le Canada, les Caraïbes et l'Afrique par la création d'espaces de dialogue stratégique, de partage de connaissances, de réseautage sélectif, de développement du leadership économique, de mentorat et de collaborations à fort impact.</p>
+    <p data-lang="en">RACCA's mission is to strengthen economic, entrepreneurial, institutional and investment relations between Canada, the Caribbean and Africa through the creation of spaces for strategic dialogue, knowledge sharing, selective networking, economic leadership development, mentoring and high-impact collaborations.</p>
+
+    <div class="mission-highlight">
+      <p data-lang="fr">Favoriser les connexions entre décideurs, entrepreneurs, investisseurs, institutions et partenaires stratégiques — contribuer au rayonnement des opportunités et au développement de corridors économiques durables.</p>
+      <p data-lang="en">Foster connections between decision-makers, entrepreneurs, investors, institutions and strategic partners — contributing to the growth of opportunities and the development of sustainable economic corridors.</p>
+    </div>
+
+    <p data-lang="fr">À travers ses activités, la RACCA favorise les connexions entre décideurs, entrepreneurs, investisseurs, institutions et partenaires stratégiques afin de contribuer au rayonnement des opportunités, à la mobilisation des expertises et au développement de corridors économiques durables entre ces territoires.</p>
+    <p data-lang="en">Through its activities, RACCA fosters connections between decision-makers, entrepreneurs, investors, institutions and strategic partners to contribute to the growth of opportunities, the mobilization of expertise and the development of sustainable economic corridors between these territories.</p>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars-section" id="pillars">
+  <div class="pillars-header reveal">
+    <div>
+      <div class="section-number">02</div>
+      <div class="section-label">
+        <div class="line"></div>
+        <span data-lang="fr">Axes Stratégiques</span>
+        <span data-lang="en">Strategic Pillars</span>
+      </div>
+      <h2 class="section-title" style="max-width:380px">
+        <span data-lang="fr">Ce que nous<br><em>construisons</em></span>
+        <span data-lang="en">What we<br><em>build together</em></span>
+      </h2>
+    </div>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card reveal">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l5 3"/></svg>
+      </div>
+      <h3 class="pillar-title" data-lang="fr">Dialogue Stratégique</h3>
+      <h3 class="pillar-title" data-lang="en">Strategic Dialogue</h3>
+      <p class="pillar-desc" data-lang="fr">Création d'espaces de rencontre entre décideurs, institutions et acteurs de l'économie transnationale.</p>
+      <p class="pillar-desc" data-lang="en">Creating meeting spaces for decision-makers, institutions and transnational economic players.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="pillar-title" data-lang="fr">Réseautage Sélectif</h3>
+      <h3 class="pillar-title" data-lang="en">Selective Networking</h3>
+      <p class="pillar-desc" data-lang="fr">Connexion ciblée d'entrepreneurs, investisseurs et leaders émergents au sein d'un écosystème à haute valeur ajoutée.</p>
+      <p class="pillar-desc" data-lang="en">Targeted connection of entrepreneurs, investors and emerging leaders within a high-value ecosystem.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3 class="pillar-title" data-lang="fr">Leadership Économique</h3>
+      <h3 class="pillar-title" data-lang="en">Economic Leadership</h3>
+      <p class="pillar-desc" data-lang="fr">Développement et rayonnement d'une nouvelle génération de leaders économiques issus de ces territoires.</p>
+      <p class="pillar-desc" data-lang="en">Developing and promoting a new generation of economic leaders from these territories.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">04</div>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <h3 class="pillar-title" data-lang="fr">Mentorat & Expertise</h3>
+      <h3 class="pillar-title" data-lang="en">Mentorship & Expertise</h3>
+      <p class="pillar-desc" data-lang="fr">Mobilisation des expertises et transfert de connaissances entre pairs et générations.</p>
+      <p class="pillar-desc" data-lang="en">Mobilizing expertise and transferring knowledge between peers and generations.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">05</div>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <h3 class="pillar-title" data-lang="fr">Partage de Connaissances</h3>
+      <h3 class="pillar-title" data-lang="en">Knowledge Sharing</h3>
+      <p class="pillar-desc" data-lang="fr">Diffusion de savoirs, d'analyses et d'opportunités à travers des plateformes d'apprentissage et d'échange.</p>
+      <p class="pillar-desc" data-lang="en">Sharing knowledge, analysis and opportunities through learning and exchange platforms.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">06</div>
+      <div class="pillar-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3 class="pillar-title" data-lang="fr">Investissement & Impact</h3>
+      <h3 class="pillar-title" data-lang="en">Investment & Impact</h3>
+      <p class="pillar-desc" data-lang="fr">Facilitation de partenariats structurants et de collaborations à fort impact économique et social.</p>
+      <p class="pillar-desc" data-lang="en">Facilitating structuring partnerships and high economic and social impact collaborations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="vision-section">
+  <div class="vision-body reveal">
+    <div class="section-number" style="color:rgba(248,245,241,0.2)">03</div>
+    <div class="section-label">
+      <div class="line"></div>
+      <span data-lang="fr" style="color:var(--rouge)">Vision</span>
+      <span data-lang="en" style="color:var(--rouge)">Vision</span>
+    </div>
+    <h2 class="section-title" style="color:var(--beige); margin-bottom:40px">
+      <span data-lang="fr">Vision<br>de la <em>RACCA</em></span>
+      <span data-lang="en">RACCA's<br><em>Vision</em></span>
+    </h2>
+    <p data-lang="fr">La RACCA aspire à devenir la plateforme de référence en matière de relations économiques, de dialogue stratégique et de leadership d'influence entre le Canada, les Caraïbes et l'Afrique.</p>
+    <p data-lang="en">RACCA aspires to become the reference platform for economic relations, strategic dialogue and influence leadership between Canada, the Caribbean and Africa.</p>
+
+    <p data-lang="fr">Sa vision est de bâtir un écosystème crédible, sélectif et à forte valeur ajoutée réunissant décideurs, institutions, investisseurs, entrepreneurs et leaders émergents afin de favoriser des partenariats structurants, le partage de connaissances et le développement d'opportunités économiques durables à l'échelle internationale.</p>
+    <p data-lang="en">Its vision is to build a credible, selective and high-value ecosystem bringing together decision-makers, institutions, investors, entrepreneurs and emerging leaders in order to foster structuring partnerships, knowledge sharing and the development of sustainable economic opportunities on an international scale.</p>
+
+    <p data-lang="fr">La RACCA ambitionne de contribuer à l'émergence d'une nouvelle génération de collaborations économiques transnationales fondées sur la confiance, le leadership, l'innovation et le rayonnement des talents et expertises issus de ces territoires.</p>
+    <p data-lang="en">RACCA aims to contribute to the emergence of a new generation of transnational economic collaborations based on trust, leadership, innovation and the outreach of talents and expertise from these territories.</p>
+  </div>
+  <div class="vision-aside reveal">
+    <div class="vision-stat">
+      <div class="num">3</div>
+      <div class="label" data-lang="fr">Territoires connectés</div>
+      <div class="label" data-lang="en">Connected territories</div>
+    </div>
+    <div class="vision-stat">
+      <div class="num">∞</div>
+      <div class="label" data-lang="fr">Opportunités générées</div>
+      <div class="label" data-lang="en">Opportunities generated</div>
+    </div>
+    <div class="vision-stat">
+      <div class="num">1</div>
+      <div class="label" data-lang="fr">Plateforme de référence</div>
+      <div class="label" data-lang="en">Reference platform</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-text">
+    <div class="eyebrow" data-lang="fr">Rejoindre la RACCA</div>
+    <div class="eyebrow" data-lang="en">Join RACCA</div>
+    <h2 data-lang="fr">Devenez acteur des<br>corridors économiques de demain.</h2>
+    <h2 data-lang="en">Become a player in<br>tomorrow's economic corridors.</h2>
+  </div>
+  <a href="#" class="btn-white">
+    <span data-lang="fr">Nous rejoindre</span>
+    <span data-lang="en">Join Us</span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><span>R</span>ACCA</div>
+    <p class="footer-tagline" data-lang="fr">Réseau des Acteurs des Relations<br>Canada–Caraïbes–Afrique</p>
+    <p class="footer-tagline" data-lang="en">Network of Actors in<br>Canada–Caribbean–Africa Relations</p>
+  </div>
+  <div class="footer-col">
+    <h4 data-lang="fr">Navigation</h4>
+    <h4 data-lang="en">Navigation</h4>
+    <a href="#mission" data-lang="fr">Mission</a>
+    <a href="#mission" data-lang="en">Mission</a>
+    <a href="#pillars" data-lang="fr">Axes stratégiques</a>
+    <a href="#pillars" data-lang="en">Strategic pillars</a>
+    <a href="#vision" data-lang="fr">Vision</a>
+    <a href="#vision" data-lang="en">Vision</a>
+  </div>
+  <div class="footer-col">
+    <h4 data-lang="fr">Contact</h4>
+    <h4 data-lang="en">Contact</h4>
+    <p data-lang="fr">Canada · Caraïbes · Afrique</p>
+    <p data-lang="en">Canada · Caribbean · Africa</p>
+    <a href="mailto:info@racca.ca">info@racca.ca</a>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 RACCA — <span data-lang="fr">Tous droits réservés</span><span data-lang="en">All rights reserved</span></p>
+    <p data-lang="fr">Conçu pour l'impact. Bâti sur la confiance.</p>
+    <p data-lang="en">Designed for impact. Built on trust.</p>
+  </div>
+</footer>
+
+<script>
+  // Language toggle
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+    document.documentElement.lang = lang;
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
