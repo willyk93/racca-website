@@ -251,6 +251,7 @@
       <a href="#pillars" data-i18n="nav_pillars">Piliers</a>
       <a href="#team" data-i18n="nav_team">Équipe</a>
       <a href="mission-kigali.html" class="kigali" data-i18n="nav_kigali">Mission Kigali ↗</a>
+      <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
       <a href="contact.html" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="head-right">
@@ -270,6 +271,7 @@
       <a href="#pillars" data-i18n="nav_pillars">Piliers</a>
       <a href="#team" data-i18n="nav_team">Équipe</a>
       <a href="mission-kigali.html" data-i18n="nav_kigali">Mission Kigali ↗</a>
+      <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
       <a href="contact.html" data-i18n="nav_contact">Contact</a>
     </div>
   </div>
@@ -433,7 +435,11 @@
         <div class="kicker" style="justify-content:center;"><span class="k-num">04</span><span class="k-line"></span><span class="k-text" data-i18n="contact_kicker">Nous joindre</span></div>
         <h2 data-i18n="contact_heading">Construisons le prochain corridor ensemble.</h2>
       </div>
-      <form id="homeContactForm" novalidate>
+      <form id="homeContactForm" name="home-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="home-contact">
+        <p style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+          <label>Ne pas remplir si vous êtes humain : <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
         <div class="field">
           <label for="hc-name" data-i18n="contact_name">Nom complet</label>
           <input id="hc-name" name="name" type="text" required>
@@ -446,8 +452,9 @@
           <label for="hc-message" data-i18n="contact_message">Message</label>
           <textarea id="hc-message" name="message" required></textarea>
         </div>
-        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;" data-i18n="contact_submit">Envoyer le message</button>
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;" id="hc-submit-btn" data-i18n="contact_submit">Envoyer le message</button>
         <div class="form-msg" id="hc-msg" data-i18n="contact_success">Message envoyé — nous vous répondrons sous peu.</div>
+        <div class="form-msg" id="hc-msg-error" style="border-color:var(--gold); background:rgba(212,160,23,.08);" data-i18n="contact_error">Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous écrire directement à info@racca.ca.</div>
       </form>
       <p class="form-note"><span data-i18n="contact_alt">Une demande spécifique ?</span> <a href="contact.html" data-i18n="contact_alt_link">Visitez notre page contact complète →</a></p>
     </div>
@@ -471,6 +478,7 @@
         <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
         <a href="index.html#team" data-i18n="nav_team">Équipe</a>
         <a href="mission-kigali.html" data-i18n="nav_kigali">Mission Kigali</a>
+        <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
         <a href="contact.html" data-i18n="nav_contact">Contact</a>
       </div>
       <div class="foot-col">
@@ -516,7 +524,7 @@ const translations = {
   fr: {
     meta_title: "RACCA — Réseau d'Affaires Canada–Caraïbes–Afrique",
     meta_desc: "La RACCA relie le Canada, les Caraïbes et l'Afrique par un corridor économique de dialogue stratégique, d'investissement et de leadership.",
-    nav_mission:"Mission", nav_pillars:"Piliers", nav_team:"Équipe", nav_kigali:"Mission Kigali ↗", nav_contact:"Contact", nav_cta:"Nous joindre",
+    nav_mission:"Mission", nav_pillars:"Piliers", nav_team:"Équipe", nav_kigali:"Mission Kigali ↗", nav_membership:"Adhésion", nav_contact:"Contact", nav_cta:"Nous joindre",
     hero_eyebrow:"Canada · Caraïbes · Afrique",
     hero_h1:"Un corridor économique entre le <em>Canada</em>, les <em>Caraïbes</em> et l'<em>Afrique</em>.",
     hero_sub:"La RACCA relie décideurs, investisseurs, entrepreneurs et institutions autour d'un même objectif&nbsp;: bâtir des relations économiques durables et à haut impact entre trois continents.",
@@ -556,6 +564,7 @@ const translations = {
     contact_kicker:"Nous joindre", contact_heading:"Construisons le prochain corridor ensemble.",
     contact_name:"Nom complet", contact_email:"Adresse courriel", contact_message:"Message", contact_submit:"Envoyer le message",
     contact_success:"Message envoyé — nous vous répondrons sous peu.",
+    contact_error:"Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous écrire directement à info@racca.ca.",
     contact_alt:"Une demande spécifique ?", contact_alt_link:"Visitez notre page contact complète →",
     footer_tagline:"Un corridor économique entre le Canada, les Caraïbes et l'Afrique — conçu pour l'impact, bâti sur la confiance.",
     footer_nav:"Navigation", footer_contact:"Contact", footer_location:"Montréal, Canada",
@@ -564,7 +573,7 @@ const translations = {
   en: {
     meta_title: "RACCA — Canada–Caribbean–Africa Business Network",
     meta_desc: "RACCA connects Canada, the Caribbean and Africa through an economic corridor of strategic dialogue, investment and leadership.",
-    nav_mission:"Mission", nav_pillars:"Pillars", nav_team:"Team", nav_kigali:"Kigali Mission ↗", nav_contact:"Contact", nav_cta:"Get in touch",
+    nav_mission:"Mission", nav_pillars:"Pillars", nav_team:"Team", nav_kigali:"Kigali Mission ↗", nav_membership:"Membership", nav_contact:"Contact", nav_cta:"Get in touch",
     hero_eyebrow:"Canada · Caribbean · Africa",
     hero_h1:"An economic corridor linking <em>Canada</em>, the <em>Caribbean</em> and <em>Africa</em>.",
     hero_sub:"RACCA connects decision-makers, investors, entrepreneurs and institutions around one goal: building sustainable, high-impact economic relations across three continents.",
@@ -604,6 +613,7 @@ const translations = {
     contact_kicker:"Get in touch", contact_heading:"Let's build the next corridor together.",
     contact_name:"Full name", contact_email:"Email address", contact_message:"Message", contact_submit:"Send message",
     contact_success:"Message sent — we'll get back to you shortly.",
+    contact_error:"Something went wrong while sending your message. Please try again or email us directly at info@racca.ca.",
     contact_alt:"Have a specific request?", contact_alt_link:"Visit our full contact page →",
     footer_tagline:"An economic corridor linking Canada, the Caribbean and Africa — designed for impact, built on trust.",
     footer_nav:"Navigation", footer_contact:"Contact", footer_location:"Montreal, Canada",
@@ -665,13 +675,33 @@ const ro = new IntersectionObserver((entries)=>{
 }, { threshold:.1 });
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-/* ---------- Home contact form (front-end only) ---------- */
+/* ---------- Home contact form (Netlify Forms) ---------- */
 const hcForm = document.getElementById('homeContactForm');
 hcForm.addEventListener('submit', function(e){
   e.preventDefault();
   const msg = document.getElementById('hc-msg');
-  msg.style.display = 'block';
-  hcForm.reset();
+  const msgError = document.getElementById('hc-msg-error');
+  const btn = document.getElementById('hc-submit-btn');
+  msg.style.display = 'none';
+  msgError.style.display = 'none';
+  btn.disabled = true; btn.style.opacity = '0.7';
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(hcForm)).toString()
+  })
+  .then((res)=>{
+    if(!res.ok) throw new Error('Network response was not ok');
+    msg.style.display = 'block';
+    hcForm.reset();
+  })
+  .catch(()=>{
+    msgError.style.display = 'block';
+  })
+  .finally(()=>{
+    btn.disabled = false; btn.style.opacity = '1';
+  });
 });
 </script>
 </body>

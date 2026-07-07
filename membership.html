@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta_title">Adhésion | RACCA</title>
+<meta name="description" data-i18n-attr="content" data-i18n="meta_desc" content="Devenez membre de la RACCA — trois volets d'adhésion pour institutions, entreprises et leaders économiques entre le Canada, les Caraïbes et l'Afrique.">
+<meta property="og:title" content="Adhésion | RACCA">
+<meta property="og:image" content="Racca-logo-1.png">
+<link rel="icon" type="image/png" href="Racca-logo-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,600;0,700;0,900;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<noscript><style>body{opacity:1 !important;} #pageLoader{display:none !important;}</style></noscript>
+<style>
+  :root{
+    --navy:#0B2E4A; --navy-dark:#082234; --navy-08: rgba(11,46,74,.08); --navy-14: rgba(11,46,74,.14); --navy-40: rgba(11,46,74,.4);
+    --gold:#D4A017; --gold-light:#e6c065;
+    --turquoise:#18A6A6; --turquoise-dark:#127f7f;
+    --green:#1F6B4E; --green-dark:#154f39;
+    --charcoal:#2E2E2E; --charcoal-60: rgba(46,46,46,.62); --charcoal-40: rgba(46,46,46,.42);
+    --offwhite:#F5F7FA; --white:#fff;
+    --shadow-sm: 0 2px 18px rgba(11,46,74,.07);
+    --shadow-md: 0 18px 50px rgba(11,46,74,.14);
+    --radius: 3px;
+  }
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; background:var(--navy); }
+  body{ font-family:'Inter',system-ui,sans-serif; color:var(--charcoal); background:var(--offwhite); -webkit-font-smoothing:antialiased; overflow-x:hidden; opacity:0; transition:opacity .6s ease; }
+  body.page-ready{ opacity:1; }
+  body::after{ content:''; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.025; mix-blend-mode:multiply; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px; }
+  .df{ font-family:'Fraunces',serif; }
+  a{ color:inherit; } img{ max-width:100%; display:block; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  section{ position:relative; }
+  h1,h2,h3{ font-family:'Fraunces',serif; letter-spacing:-.01em; color:var(--charcoal); }
+  em{ font-style:italic; color:var(--gold); }
+
+  .kicker{ display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+  .kicker .k-num{ font-family:'Fraunces',serif; font-style:italic; font-weight:600; font-size:1.15rem; color:var(--gold); }
+  .kicker .k-line{ width:34px; height:1px; background:var(--navy-14); }
+  .kicker .k-text{ font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--navy); font-weight:600; }
+  .kicker.light .k-line{ background:rgba(245,247,250,.24); }
+  .kicker.light .k-text{ color:rgba(245,247,250,.72); }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; font-size:.76rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:15px 30px; border-radius:var(--radius); text-decoration:none; border:1px solid transparent; transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, background .3s, color .3s, border-color .3s; cursor:pointer; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-gold{ background:var(--gold); color:var(--navy); }
+  .btn-gold:hover{ background:var(--gold-light); box-shadow:var(--shadow-md); }
+  .btn-outline-light{ border-color:rgba(245,247,250,.4); color:var(--offwhite); }
+  .btn-outline-light:hover{ border-color:var(--offwhite); background:rgba(245,247,250,.06); }
+  .btn-navy{ background:var(--navy); color:var(--offwhite); }
+  .btn-navy:hover{ background:var(--navy-dark); box-shadow:var(--shadow-md); }
+  .btn-outline-navy{ border-color:var(--navy-14); color:var(--navy); background:transparent; }
+  .btn-outline-navy:hover{ border-color:var(--navy); background:var(--navy-08); }
+  .btn-sm{ padding:12px 22px; font-size:.7rem; width:100%; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+
+  /* ---------- Header ---------- */
+  #scrollbar{ position:fixed; top:0; left:0; height:2px; background:var(--gold); z-index:400; width:0; }
+  header{ position:fixed; top:0; left:0; right:0; z-index:300; background:rgba(245,247,250,.86); backdrop-filter:blur(14px) saturate(1.3); -webkit-backdrop-filter:blur(14px) saturate(1.3); border-bottom:1px solid var(--navy-08); transition:box-shadow .3s, background .3s; }
+  header.scrolled{ box-shadow:var(--shadow-sm); background:rgba(245,247,250,.97); }
+  .nav-inner{ max-width:1240px; margin:0 auto; padding:0 32px; height:98px; display:flex; align-items:center; justify-content:space-between; gap:24px; transition:height .3s ease; }
+  header.scrolled .nav-inner{ height:82px; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0; background:#fff; border:1px solid var(--navy-08); border-radius:10px; padding:7px 16px 7px 9px; box-shadow:0 1px 4px rgba(11,46,74,.05); transition:box-shadow .3s ease, transform .3s cubic-bezier(.22,1,.36,1); }
+  .brand:hover{ box-shadow:var(--shadow-sm); transform:translateY(-2px); }
+  .brand img.mark, .brand img.word{ height:48px; width:auto; display:block; }
+  @media (max-width:980px){ .brand{ padding:6px 12px 6px 7px; border-radius:8px; } .brand img.mark, .brand img.word{ height:36px; } }
+  @media (max-width:480px){ .brand{ padding:5px 10px 5px 6px; } .brand img.mark, .brand img.word{ height:28px; } }
+  nav.primary{ display:flex; align-items:center; gap:28px; }
+  nav.primary a{ position:relative; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--navy); text-decoration:none; padding-bottom:4px; white-space:nowrap; }
+  nav.primary a::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
+  nav.primary a:hover::after, nav.primary a.active::after{ transform:scaleX(1); }
+  nav.primary a.kigali{ color:var(--turquoise-dark); }
+  nav.primary a.membership{ color:#8a6a10; }
+  .head-right{ display:flex; align-items:center; gap:18px; flex-shrink:0; }
+  .lang-toggle{ display:flex; border:1px solid var(--navy-14); border-radius:20px; overflow:hidden; }
+  .lang-toggle button{ background:none; border:0; padding:6px 13px; font-size:.68rem; font-weight:700; letter-spacing:.1em; color:var(--charcoal-60); cursor:pointer; transition:background .25s, color .25s; }
+  .lang-toggle button.active{ background:var(--navy); color:var(--offwhite); }
+  .burger{ display:none; background:none; border:0; cursor:pointer; width:38px; height:38px; align-items:center; justify-content:center; }
+  #mobileMenu{ display:none; }
+  @media (max-width: 1080px){
+    nav.primary{ display:none; }
+    .burger{ display:flex; }
+    .nav-inner{ height:80px; }
+    #mobileMenu.open{ display:block; background:var(--white); border-top:1px solid var(--navy-08); box-shadow:var(--shadow-sm); }
+    #mobileMenu .wrap{ padding:22px 28px 30px; display:flex; flex-direction:column; gap:18px; }
+    #mobileMenu a{ font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; color:var(--navy); text-decoration:none; }
+  }
+
+  /* ---------- Page hero ---------- */
+  .phero{ background:var(--navy); padding:168px 0 76px; position:relative; overflow:hidden; }
+  .phero::after{ content:''; position:absolute; bottom:-120px; right:-80px; width:360px; height:360px; border:1px solid rgba(245,247,250,.06); border-radius:50%; }
+  .phero h1{ font-size:clamp(2.1rem,4.2vw,3.2rem); font-weight:600; color:var(--offwhite); line-height:1.14; margin-bottom:16px; max-width:680px; }
+  .phero p{ color:rgba(245,247,250,.68); font-size:1rem; line-height:1.8; max-width:600px; }
+
+  /* ---------- Quick nav (stream jump links) ---------- */
+  .quicknav{ background:var(--white); border-bottom:1px solid var(--navy-08); position:relative; z-index:2; }
+  .quicknav-inner{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; padding:22px 0; }
+  .qn-btn{ background:none; border:1px solid var(--navy-14); padding:11px 24px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--charcoal-60); text-decoration:none; border-radius:20px; transition:all .3s; display:inline-flex; align-items:center; gap:8px; }
+  .qn-btn:hover{ border-color:var(--navy); color:var(--navy); background:var(--navy-08); }
+  .qn-btn .dot{ width:7px; height:7px; border-radius:50%; }
+  .qn-btn.n1 .dot{ background:var(--navy); }
+  .qn-btn.n2 .dot{ background:var(--turquoise); }
+  .qn-btn.n3 .dot{ background:var(--gold); }
+
+  /* ---------- Stream sections ---------- */
+  .stream{ padding:100px 0; }
+  .stream.alt{ background:var(--white); border-top:1px solid var(--navy-08); border-bottom:1px solid var(--navy-08); }
+  .stream-head{ text-align:center; max-width:760px; margin:0 auto 34px; }
+  .stream-head h2{ font-size:clamp(1.8rem,3.2vw,2.4rem); font-weight:600; margin-bottom:16px; }
+  .stream-head p{ color:var(--charcoal-60); font-size:1rem; line-height:1.8; }
+
+  .audience{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:820px; margin:0 auto 56px; }
+  .audience span{ font-size:.72rem; letter-spacing:.04em; font-weight:600; color:var(--navy); background:var(--navy-08); padding:8px 16px; border-radius:16px; }
+
+  .tier-grid{ display:grid; gap:26px; }
+  .tier-grid.cols-2{ grid-template-columns:repeat(2,1fr); }
+  .tier-grid.cols-3{ grid-template-columns:repeat(3,1fr); }
+  @media (max-width:920px){ .tier-grid.cols-2, .tier-grid.cols-3{ grid-template-columns:1fr; max-width:520px; margin:0 auto; } }
+
+  .tier-card{ background:var(--white); border:1px solid var(--navy-08); padding:40px 34px; display:flex; flex-direction:column; position:relative; transition:transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease; }
+  .tier-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+  .tier-card .bar{ position:absolute; top:0; left:0; right:0; height:3px; }
+  .stream.n1 .tier-card:nth-child(1) .bar{ background:var(--navy); }
+  .stream.n1 .tier-card:nth-child(2) .bar{ background:var(--gold); }
+  .stream.n2 .tier-card:nth-child(1) .bar{ background:var(--turquoise); }
+  .stream.n2 .tier-card:nth-child(2) .bar{ background:var(--navy); }
+  .stream.n2 .tier-card:nth-child(3) .bar{ background:var(--gold); }
+  .tier-featured{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold); }
+  .tier-featured-tag{ position:absolute; top:-13px; right:28px; background:var(--gold); color:var(--navy); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; padding:6px 14px; border-radius:12px; }
+  .tier-name{ font-size:1.2rem; font-weight:600; margin-bottom:6px; }
+  .tier-price{ font-size:2.1rem; font-weight:700; color:var(--navy); line-height:1; margin-bottom:4px; }
+  .tier-price .per{ font-family:'Inter',sans-serif; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:var(--charcoal-40); margin-left:6px; }
+  .tier-audience{ font-size:.76rem; color:var(--charcoal-40); margin-bottom:16px; font-weight:600; }
+  .tier-desc{ font-size:.88rem; color:var(--charcoal-60); line-height:1.6; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--navy-08); }
+  .tier-list{ list-style:none; margin-bottom:28px; flex-grow:1; }
+  .tier-list li{ display:flex; gap:10px; align-items:flex-start; font-size:.85rem; color:var(--charcoal-60); line-height:1.6; margin-bottom:12px; }
+  .tier-list li svg{ flex-shrink:0; width:15px; height:15px; margin-top:3px; stroke:var(--turquoise-dark); fill:none; stroke-width:2.2; }
+  .tier-includes{ font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; font-weight:700; color:var(--charcoal-40); margin-bottom:12px; }
+
+  /* ---------- Leaders Circle band ---------- */
+  .leaders-band{ background:var(--navy); padding:110px 0; position:relative; overflow:hidden; }
+  .leaders-band::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 88% 12%, rgba(212,160,23,.14), transparent 55%); pointer-events:none; }
+  .leaders-band::after{ content:''; position:absolute; top:-140px; left:-140px; width:340px; height:340px; border:1px dashed rgba(212,160,23,.18); border-radius:50%; }
+  .leaders-inner{ position:relative; z-index:2; max-width:820px; margin:0 auto; text-align:center; }
+  .leaders-badge{ display:inline-flex; align-items:center; gap:8px; background:rgba(212,160,23,.14); border:1px solid rgba(212,160,23,.35); color:var(--gold-light); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; font-weight:700; padding:9px 20px; border-radius:20px; margin-bottom:26px; }
+  .leaders-inner h2{ color:var(--offwhite); font-size:clamp(2rem,3.6vw,2.7rem); font-weight:600; margin-bottom:18px; }
+  .leaders-inner > p.lead{ color:rgba(245,247,250,.7); font-size:1.02rem; line-height:1.8; margin-bottom:16px; }
+  .leaders-price{ font-family:'Fraunces',serif; font-size:2.6rem; font-weight:700; color:var(--gold-light); margin:26px 0 6px; }
+  .leaders-price .per{ font-family:'Inter',sans-serif; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:rgba(245,247,250,.5); margin-left:8px; }
+  .leaders-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; text-align:left; margin:46px 0 42px; }
+  @media (max-width:760px){ .leaders-grid{ grid-template-columns:1fr; gap:32px; } }
+  .leaders-col h4{ font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-light); font-weight:700; margin-bottom:18px; }
+  .leaders-col ul{ list-style:none; }
+  .leaders-col li{ display:flex; gap:10px; align-items:flex-start; font-size:.87rem; color:rgba(245,247,250,.75); line-height:1.6; margin-bottom:12px; }
+  .leaders-col li svg{ flex-shrink:0; width:14px; height:14px; margin-top:3px; stroke:var(--gold-light); fill:none; stroke-width:2.2; }
+  .leaders-cta{ text-align:center; }
+
+  /* ---------- Positioning quote band ---------- */
+  .positioning{ background:var(--offwhite); padding:100px 0; text-align:center; }
+  .positioning-inner{ max-width:780px; margin:0 auto; }
+  .positioning blockquote{ border-left:3px solid var(--gold); background:rgba(212,160,23,.06); padding:30px 34px; text-align:left; }
+  .positioning blockquote p{ font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; line-height:1.7; color:var(--navy); }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--navy); padding-top:70px; position:relative; }
+  footer::before{ content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right, var(--gold), transparent 65%); }
+  .foot-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px; padding-bottom:52px; border-bottom:1px solid rgba(245,247,250,.1); }
+  .foot-brand-plate{ display:inline-flex; align-items:center; gap:12px; background:var(--offwhite); padding:12px 18px; border-radius:var(--radius); margin-bottom:18px; }
+  .foot-brand-plate img.mark, .foot-brand-plate img.word{ height:34px; }
+  .foot-tagline{ color:rgba(245,247,250,.5); font-size:.88rem; line-height:1.7; max-width:280px; }
+  .foot-col h4{ font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,247,250,.4); font-weight:700; margin-bottom:20px; }
+  .foot-col a, .foot-col p{ display:block; font-size:.87rem; color:rgba(245,247,250,.68); text-decoration:none; line-height:2.1; }
+  .foot-col a:hover{ color:var(--gold); }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding:26px 0 34px; }
+  .foot-bottom p{ font-size:.74rem; color:rgba(245,247,250,.35); }
+  @media (max-width:820px){ .foot-grid{ grid-template-columns:1fr; gap:36px; } }
+
+  /* ---------- Page loader ---------- */
+  #pageLoader{ position:fixed; inset:0; z-index:9999; background:var(--navy); display:flex; align-items:center; justify-content:center; transition:opacity .5s ease, visibility .5s ease; }
+  #pageLoader::before{ content:''; position:absolute; inset:0; opacity:.06; background-image:radial-gradient(rgba(245,247,250,.5) 1px, transparent 1px); background-size:22px 22px; }
+  #pageLoader.loaded{ opacity:0; visibility:hidden; pointer-events:none; }
+  .loader-spin{ position:relative; width:112px; height:112px; display:flex; align-items:center; justify-content:center; }
+  .loader-ring{ position:absolute; inset:0; border-radius:50%; border:2px solid rgba(245,247,250,.14); border-top-color:var(--gold); animation:loaderTurn 1.1s linear infinite; }
+  .loader-ring2{ position:absolute; inset:14px; border-radius:50%; border:1px dashed rgba(24,166,166,.4); animation:loaderTurn 2.6s linear infinite reverse; }
+  .loader-logo{ width:56px; height:56px; object-fit:contain; position:relative; z-index:2; animation:loaderTurn 1.8s linear infinite; filter:drop-shadow(0 6px 18px rgba(0,0,0,.35)); }
+  @keyframes loaderTurn{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .loader-ring, .loader-ring2, .loader-logo{ animation:none; } }
+</style>
+</head>
+<body>
+
+<div id="pageLoader" aria-hidden="true">
+  <div class="loader-spin">
+    <div class="loader-ring"></div>
+    <div class="loader-ring2"></div>
+    <img class="loader-logo" src="Racca-logo-1.png" alt="">
+  </div>
+</div>
+
+<div id="scrollbar"></div>
+
+<header id="siteHeader">
+  <div class="nav-inner">
+    <a href="index.html#top" class="brand" aria-label="RACCA — Accueil">
+      <img class="mark" src="Racca-logo-1.png" alt="RACCA">
+      <img class="word" src="Racca-word-mark.png" alt="RACCA — Réseau d'Affaires Canada-Caraïbes-Afrique">
+    </a>
+    <nav class="primary">
+      <a href="index.html#mission" data-i18n="nav_mission">Mission</a>
+      <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
+      <a href="index.html#team" data-i18n="nav_team">Équipe</a>
+      <a href="mission-kigali.html" class="kigali" data-i18n="nav_kigali">Mission Kigali ↗</a>
+      <a href="membership.html" class="membership active" data-i18n="nav_membership">Adhésion</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="head-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="fr" onclick="setLang('fr')">FR</button>
+        <button type="button" data-lang-btn="en" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="#institutional" class="btn btn-gold" style="padding:11px 22px;" data-i18n="nav_cta">Devenir membre</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B2E4A" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu">
+    <div class="wrap">
+      <a href="index.html#mission" data-i18n="nav_mission">Mission</a>
+      <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
+      <a href="index.html#team" data-i18n="nav_team">Équipe</a>
+      <a href="mission-kigali.html" data-i18n="nav_kigali">Mission Kigali ↗</a>
+      <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="phero">
+  <div class="wrap reveal">
+    <div class="kicker light"><span class="k-line"></span><span class="k-text" data-i18n="ph_kicker">Adhésion RACCA</span></div>
+    <h1 data-i18n="ph_h1">Devenez membre du corridor <em>Canada–Caraïbes–Afrique</em>.</h1>
+    <p data-i18n="ph_p">Trois volets d'adhésion — institutionnel, entrepreneurial et de haute direction — conçus pour connecter décideurs, entreprises et investisseurs à des occasions concrètes entre les trois continents.</p>
+  </div>
+</section>
+
+<!-- QUICK NAV -->
+<nav class="quicknav reveal" aria-label="Volets d'adhésion">
+  <div class="wrap quicknav-inner">
+    <a class="qn-btn n1" href="#institutional"><span class="dot"></span><span data-i18n="qn1">Institutions &amp; partenaires stratégiques</span></a>
+    <a class="qn-btn n2" href="#business"><span class="dot"></span><span data-i18n="qn2">Entreprises &amp; entrepreneurs</span></a>
+    <a class="qn-btn n3" href="#leaders"><span class="dot"></span><span data-i18n="qn3">Cercle des leaders</span></a>
+  </div>
+</nav>
+
+<!-- STREAM 1: INSTITUTIONAL & STRATEGIC PARTNERS -->
+<section class="stream n1" id="institutional">
+  <div class="wrap">
+    <div class="stream-head reveal">
+      <div class="kicker" style="justify-content:center;"><span class="k-num">01</span><span class="k-line"></span><span class="k-text" data-i18n="s1_kicker">Volet institutionnel</span></div>
+      <h2 data-i18n="s1_heading">Institutions &amp; partenaires stratégiques</h2>
+      <p data-i18n="s1_desc">Ce volet rassemble les institutions publiques, organismes gouvernementaux et organisations internationales engagés à renforcer les relations économiques entre le Canada, les Caraïbes et l'Afrique.</p>
+    </div>
+
+    <div class="audience reveal">
+      <span data-i18n="s1_a1">Ambassades &amp; hauts-commissariats</span>
+      <span data-i18n="s1_a2">Consulats</span>
+      <span data-i18n="s1_a3">Gouvernements &amp; organismes publics</span>
+      <span data-i18n="s1_a4">Organisations internationales</span>
+      <span data-i18n="s1_a5">Chambres de commerce</span>
+      <span data-i18n="s1_a6">Agences de développement économique</span>
+      <span data-i18n="s1_a7">Universités &amp; centres de recherche</span>
+      <span data-i18n="s1_a8">Institutions financières multilatérales</span>
+    </div>
+
+    <div class="tier-grid cols-2 reveal">
+      <div class="tier-card">
+        <div class="bar"></div>
+        <div class="tier-name" data-i18n="t_inst_name">Institutionnel</div>
+        <div class="tier-price">2 500 $ <span class="per" data-i18n="per_year">/ an</span></div>
+        <div class="tier-desc" data-i18n="t_inst_desc">Conçu pour une participation active à l'écosystème RACCA.</div>
+        <ul class="tier-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b1">Participation aux tables rondes diplomatiques et économiques</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b2">Accès aux missions économiques officielles</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b3">Invitations VIP aux événements RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b4">Visibilité institutionnelle sur les plateformes RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b5">Possibilité de présenter des programmes et initiatives</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b6">Accès aux entreprises membres qualifiées</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_inst_b7">Participation aux groupes de travail sectoriels</span></li>
+        </ul>
+        <a href="https://tania-louis.mykajabi.com/offers/UL8cJrnj" class="btn btn-navy btn-sm" target="_blank" rel="noopener" data-i18n="t_cta">Devenir membre</a>
+      </div>
+
+      <div class="tier-card tier-featured">
+        <div class="tier-featured-tag" data-i18n="tag_structuring">Rôle structurant</div>
+        <div class="bar"></div>
+        <div class="tier-name" data-i18n="t_strat_name">Partenaire stratégique</div>
+        <div class="tier-price">25 000 $ <span class="per" data-i18n="per_year">/ an</span></div>
+        <div class="tier-desc" data-i18n="t_strat_desc">Pour les institutions qui souhaitent jouer un rôle structurant au sein de l'écosystème économique RACCA.</div>
+        <div class="tier-includes" data-i18n="t_strat_includes">En plus des avantages Institutionnel :</div>
+        <ul class="tier-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b1">Accès prioritaire aux partenariats RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b2">Co-développement d'initiatives et de projets économiques</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b3">Présence renforcée au sein des délégations officielles</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b4">Opportunités de prise de parole lors des grands événements</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b5">Visibilité premium dans les communications RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b6">Accès privilégié aux tables rondes stratégiques</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_strat_b7">Participation à des projets structurés multi-pays</span></li>
+        </ul>
+        <a href="https://tania-louis.mykajabi.com/offers/dtzesr5F" class="btn btn-gold btn-sm" target="_blank" rel="noopener" data-i18n="t_cta">Devenir membre</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STREAM 2: BUSINESS & ENTREPRENEUR -->
+<section class="stream n2 alt" id="business">
+  <div class="wrap">
+    <div class="stream-head reveal">
+      <div class="kicker" style="justify-content:center;"><span class="k-num">02</span><span class="k-line"></span><span class="k-text" data-i18n="s2_kicker">Volet entreprises</span></div>
+      <h2 data-i18n="s2_heading">Entreprises &amp; entrepreneurs</h2>
+      <p data-i18n="s2_desc">Ce volet connecte entreprises et entrepreneurs à des occasions de croissance concrètes à travers le Canada, les Caraïbes et l'Afrique.</p>
+    </div>
+
+    <div class="tier-grid cols-3 reveal">
+      <div class="tier-card">
+        <div class="bar"></div>
+        <div class="tier-name" data-i18n="t_entre_name">Entrepreneur</div>
+        <div class="tier-price">150 $ <span class="per" data-i18n="per_year">/ an</span></div>
+        <div class="tier-audience" data-i18n="t_entre_audience">Travailleurs autonomes, consultants, startups</div>
+        <div class="tier-desc" data-i18n="t_entre_desc">Accès essentiel au réseau.</div>
+        <ul class="tier-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_entre_b1">Accès au réseau RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_entre_b2">Participation aux webinaires et formations</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_entre_b3">Accès à l'annuaire des membres</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_entre_b4">Tarifs réduits pour les événements</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_entre_b5">Visibilité de base au sein de l'écosystème</span></li>
+        </ul>
+        <a href="https://tania-louis.mykajabi.com/offers/LdzXmD5J" class="btn btn-outline-navy btn-sm" target="_blank" rel="noopener" data-i18n="t_cta">Devenir membre</a>
+      </div>
+
+      <div class="tier-card">
+        <div class="bar"></div>
+        <div class="tier-name" data-i18n="t_biz_name">Entreprise</div>
+        <div class="tier-price">500 $ <span class="per" data-i18n="per_year">/ an</span></div>
+        <div class="tier-audience" data-i18n="t_biz_audience">PME</div>
+        <div class="tier-desc" data-i18n="t_biz_desc">Accès structuré au développement des affaires.</div>
+        <div class="tier-includes" data-i18n="t_biz_includes">En plus des avantages Entrepreneur :</div>
+        <ul class="tier-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_biz_b1">Profil d'entreprise dans l'annuaire RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_biz_b2">Participation aux activités de réseautage ciblées</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_biz_b3">Mises en relation avec des partenaires stratégiques</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_biz_b4">Accès à certaines occasions d'investissement</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_biz_b5">Accès prioritaire aux missions commerciales</span></li>
+        </ul>
+        <a href="https://tania-louis.mykajabi.com/offers/ftCpEurw" class="btn btn-navy btn-sm" target="_blank" rel="noopener" data-i18n="t_cta">Devenir membre</a>
+      </div>
+
+      <div class="tier-card tier-featured">
+        <div class="tier-featured-tag" data-i18n="tag_popular">Le plus complet</div>
+        <div class="bar"></div>
+        <div class="tier-name" data-i18n="t_prem_name">Entreprise Premium</div>
+        <div class="tier-price">1 500 $ <span class="per" data-i18n="per_year">/ an</span></div>
+        <div class="tier-audience" data-i18n="t_prem_audience">Grandes entreprises et investisseurs</div>
+        <div class="tier-desc" data-i18n="t_prem_desc">Accès stratégique et international.</div>
+        <div class="tier-includes" data-i18n="t_prem_includes">En plus des avantages Entreprise :</div>
+        <ul class="tier-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_prem_b1">Rencontres stratégiques annuelles</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_prem_b2">Occasions de maillage personnalisées</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_prem_b3">Visibilité accrue sur les plateformes RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_prem_b4">Invitations aux tables rondes à huis clos</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_prem_b5">Accès prioritaire aux délégations internationales</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="t_prem_b6">Possibilité de participer comme panéliste ou conférencier</span></li>
+        </ul>
+        <a href="https://tania-louis.mykajabi.com/offers/3aJfFsyt" class="btn btn-gold btn-sm" target="_blank" rel="noopener" data-i18n="t_cta">Devenir membre</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STREAM 3: LEADERS CIRCLE -->
+<section class="leaders-band" id="leaders">
+  <div class="wrap leaders-inner reveal">
+    <div class="leaders-badge" data-i18n="s3_badge">Sur invitation seulement</div>
+    <div class="kicker light" style="justify-content:center;"><span class="k-num">03</span><span class="k-line"></span><span class="k-text" data-i18n="s3_kicker">Cercle des leaders</span></div>
+    <h2 data-i18n="s3_heading">Cercle des leaders RACCA</h2>
+    <p class="lead" data-i18n="s3_desc">Un cercle exclusif réunissant les principaux acteurs économiques et financiers engagés dans le développement des corridors d'affaires Canada–Caraïbes–Afrique. Ce niveau représente le plus haut échelon d'influence et de décision au sein de la RACCA.</p>
+    <div class="leaders-price">15 000 $ <span class="per" data-i18n="per_year">/ an</span></div>
+
+    <div class="leaders-grid">
+      <div class="leaders-col">
+        <h4 data-i18n="s3_target_h">Membres visés</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t1">Sociétés multinationales</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t2">Banques et institutions financières</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t3">Cabinets d'avocats et de conseil stratégique</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t4">Fonds d'investissement et de capital de risque</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t5">Entreprises minières et énergétiques</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t6">Entreprises de télécommunications et d'infrastructure</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t7">Entreprises de transport et de logistique</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_t8">Grandes institutions économiques</span></li>
+        </ul>
+      </div>
+      <div class="leaders-col">
+        <h4 data-i18n="s3_benefits_h">Avantages exclusifs</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b1">Rencontres privées avec les délégations internationales</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b2">Accès direct aux décideurs publics et économiques</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b3">Positionnement comme partenaire clé de l'écosystème RACCA</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b4">Participation à un conseil consultatif stratégique</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b5">Co-organisation d'événements majeurs</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b6">Visibilité de marque de haut niveau dans les communications institutionnelles</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b7">Accès prioritaire aux occasions d'investissement à fort impact</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="s3_b8">Participation aux tables rondes décisionnelles à huis clos</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="leaders-cta">
+      <a href="contact.html" class="btn btn-gold" data-i18n="s3_cta">Demander une invitation</a>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL POSITIONING -->
+<section class="positioning">
+  <div class="wrap positioning-inner reveal">
+    <div class="kicker" style="justify-content:center;"><span class="k-line"></span><span class="k-text" data-i18n="pos_kicker">Positionnement RACCA</span></div>
+    <blockquote><p data-i18n="pos_quote">La RACCA se positionne comme un pont stratégique entre le Canada, les Caraïbes et l'Afrique, intégrant diplomatie économique, développement des affaires et accès direct aux marchés internationaux. Elle offre un écosystème structuré où institutions, entreprises et investisseurs peuvent transformer les relations internationales en occasions économiques concrètes.</p></blockquote>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand-plate">
+          <img class="mark" src="Racca-logo-1.png" alt="RACCA">
+          <img class="word" src="Racca-word-mark.png" alt="RACCA">
+        </div>
+        <p class="foot-tagline" data-i18n="footer_tagline">Un corridor économique entre le Canada, les Caraïbes et l'Afrique — conçu pour l'impact, bâti sur la confiance.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footer_nav">Navigation</h4>
+        <a href="index.html#mission" data-i18n="nav_mission">Mission</a>
+        <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
+        <a href="index.html#team" data-i18n="nav_team">Équipe</a>
+        <a href="mission-kigali.html" data-i18n="nav_kigali">Mission Kigali</a>
+        <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="footer_contact">Contact</h4>
+        <a href="mailto:info@racca.ca">info@racca.ca</a>
+        <a href="tel:+15148047131">+1 (514) 804-7131</a>
+        <p style="color:rgba(245,247,250,.35); font-size:.78rem;" data-i18n="footer_location">Montréal, Canada</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 RACCA — <span data-i18n="footer_rights">Tous droits réservés</span></p>
+      <p data-i18n="footer_signature">Conçu pour l'impact. Bâti sur la confiance.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Page loader ---------- */
+(function(){
+  const loader = document.getElementById('pageLoader');
+  let revealed = false;
+  function reveal(){
+    if(revealed) return;
+    revealed = true;
+    document.body.classList.add('page-ready');
+    if(loader){ loader.classList.add('loaded'); }
+  }
+  window.addEventListener('load', function(){ setTimeout(reveal, 350); });
+  setTimeout(reveal, 4000);
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a[href$=".html"], a[href*=".html#"]');
+    if(!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || a.hasAttribute('download')) return;
+    const current = window.location.pathname.split('/').pop();
+    const dest = a.getAttribute('href').split('#')[0];
+    if(dest && dest !== current && loader){ loader.classList.remove('loaded'); }
+  });
+})();
+
+/* ---------- i18n ---------- */
+const translations = {
+  fr: {
+    meta_title:"Adhésion | RACCA",
+    meta_desc:"Devenez membre de la RACCA — trois volets d'adhésion pour institutions, entreprises et leaders économiques entre le Canada, les Caraïbes et l'Afrique.",
+    nav_mission:"Mission", nav_pillars:"Piliers", nav_team:"Équipe", nav_kigali:"Mission Kigali ↗", nav_membership:"Adhésion", nav_contact:"Contact", nav_cta:"Devenir membre",
+    ph_kicker:"Adhésion RACCA",
+    ph_h1:"Devenez membre du corridor <em>Canada–Caraïbes–Afrique</em>.",
+    ph_p:"Trois volets d'adhésion — institutionnel, entrepreneurial et de haute direction — conçus pour connecter décideurs, entreprises et investisseurs à des occasions concrètes entre les trois continents.",
+    qn1:"Institutions &amp; partenaires stratégiques", qn2:"Entreprises &amp; entrepreneurs", qn3:"Cercle des leaders",
+    per_year:"/ an", tag_structuring:"Rôle structurant", tag_popular:"Le plus complet", t_cta:"Devenir membre",
+
+    s1_kicker:"Volet institutionnel", s1_heading:"Institutions &amp; partenaires stratégiques",
+    s1_desc:"Ce volet rassemble les institutions publiques, organismes gouvernementaux et organisations internationales engagés à renforcer les relations économiques entre le Canada, les Caraïbes et l'Afrique.",
+    s1_a1:"Ambassades &amp; hauts-commissariats", s1_a2:"Consulats", s1_a3:"Gouvernements &amp; organismes publics", s1_a4:"Organisations internationales",
+    s1_a5:"Chambres de commerce", s1_a6:"Agences de développement économique", s1_a7:"Universités &amp; centres de recherche", s1_a8:"Institutions financières multilatérales",
+
+    t_inst_name:"Institutionnel", t_inst_desc:"Conçu pour une participation active à l'écosystème RACCA.",
+    t_inst_b1:"Participation aux tables rondes diplomatiques et économiques", t_inst_b2:"Accès aux missions économiques officielles",
+    t_inst_b3:"Invitations VIP aux événements RACCA", t_inst_b4:"Visibilité institutionnelle sur les plateformes RACCA",
+    t_inst_b5:"Possibilité de présenter des programmes et initiatives", t_inst_b6:"Accès aux entreprises membres qualifiées",
+    t_inst_b7:"Participation aux groupes de travail sectoriels",
+
+    t_strat_name:"Partenaire stratégique", t_strat_desc:"Pour les institutions qui souhaitent jouer un rôle structurant au sein de l'écosystème économique RACCA.",
+    t_strat_includes:"En plus des avantages Institutionnel :",
+    t_strat_b1:"Accès prioritaire aux partenariats RACCA", t_strat_b2:"Co-développement d'initiatives et de projets économiques",
+    t_strat_b3:"Présence renforcée au sein des délégations officielles", t_strat_b4:"Opportunités de prise de parole lors des grands événements",
+    t_strat_b5:"Visibilité premium dans les communications RACCA", t_strat_b6:"Accès privilégié aux tables rondes stratégiques",
+    t_strat_b7:"Participation à des projets structurés multi-pays",
+
+    s2_kicker:"Volet entreprises", s2_heading:"Entreprises &amp; entrepreneurs",
+    s2_desc:"Ce volet connecte entreprises et entrepreneurs à des occasions de croissance concrètes à travers le Canada, les Caraïbes et l'Afrique.",
+
+    t_entre_name:"Entrepreneur", t_entre_audience:"Travailleurs autonomes, consultants, startups", t_entre_desc:"Accès essentiel au réseau.",
+    t_entre_b1:"Accès au réseau RACCA", t_entre_b2:"Participation aux webinaires et formations", t_entre_b3:"Accès à l'annuaire des membres",
+    t_entre_b4:"Tarifs réduits pour les événements", t_entre_b5:"Visibilité de base au sein de l'écosystème",
+
+    t_biz_name:"Entreprise", t_biz_audience:"PME", t_biz_desc:"Accès structuré au développement des affaires.",
+    t_biz_includes:"En plus des avantages Entrepreneur :",
+    t_biz_b1:"Profil d'entreprise dans l'annuaire RACCA", t_biz_b2:"Participation aux activités de réseautage ciblées",
+    t_biz_b3:"Mises en relation avec des partenaires stratégiques", t_biz_b4:"Accès à certaines occasions d'investissement",
+    t_biz_b5:"Accès prioritaire aux missions commerciales",
+
+    t_prem_name:"Entreprise Premium", t_prem_audience:"Grandes entreprises et investisseurs", t_prem_desc:"Accès stratégique et international.",
+    t_prem_includes:"En plus des avantages Entreprise :",
+    t_prem_b1:"Rencontres stratégiques annuelles", t_prem_b2:"Occasions de maillage personnalisées",
+    t_prem_b3:"Visibilité accrue sur les plateformes RACCA", t_prem_b4:"Invitations aux tables rondes à huis clos",
+    t_prem_b5:"Accès prioritaire aux délégations internationales", t_prem_b6:"Possibilité de participer comme panéliste ou conférencier",
+
+    s3_badge:"Sur invitation seulement", s3_kicker:"Cercle des leaders", s3_heading:"Cercle des leaders RACCA",
+    s3_desc:"Un cercle exclusif réunissant les principaux acteurs économiques et financiers engagés dans le développement des corridors d'affaires Canada–Caraïbes–Afrique. Ce niveau représente le plus haut échelon d'influence et de décision au sein de la RACCA.",
+    s3_target_h:"Membres visés",
+    s3_t1:"Sociétés multinationales", s3_t2:"Banques et institutions financières", s3_t3:"Cabinets d'avocats et de conseil stratégique",
+    s3_t4:"Fonds d'investissement et de capital de risque", s3_t5:"Entreprises minières et énergétiques",
+    s3_t6:"Entreprises de télécommunications et d'infrastructure", s3_t7:"Entreprises de transport et de logistique", s3_t8:"Grandes institutions économiques",
+    s3_benefits_h:"Avantages exclusifs",
+    s3_b1:"Rencontres privées avec les délégations internationales", s3_b2:"Accès direct aux décideurs publics et économiques",
+    s3_b3:"Positionnement comme partenaire clé de l'écosystème RACCA", s3_b4:"Participation à un conseil consultatif stratégique",
+    s3_b5:"Co-organisation d'événements majeurs", s3_b6:"Visibilité de marque de haut niveau dans les communications institutionnelles",
+    s3_b7:"Accès prioritaire aux occasions d'investissement à fort impact", s3_b8:"Participation aux tables rondes décisionnelles à huis clos",
+    s3_cta:"Demander une invitation",
+
+    pos_kicker:"Positionnement RACCA",
+    pos_quote:"La RACCA se positionne comme un pont stratégique entre le Canada, les Caraïbes et l'Afrique, intégrant diplomatie économique, développement des affaires et accès direct aux marchés internationaux. Elle offre un écosystème structuré où institutions, entreprises et investisseurs peuvent transformer les relations internationales en occasions économiques concrètes.",
+
+    footer_tagline:"Un corridor économique entre le Canada, les Caraïbes et l'Afrique — conçu pour l'impact, bâti sur la confiance.",
+    footer_nav:"Navigation", footer_contact:"Contact", footer_location:"Montréal, Canada",
+    footer_rights:"Tous droits réservés", footer_signature:"Conçu pour l'impact. Bâti sur la confiance."
+  },
+  en: {
+    meta_title:"Membership | RACCA",
+    meta_desc:"Become a RACCA member — three membership streams for institutions, businesses and economic leaders across Canada, the Caribbean and Africa.",
+    nav_mission:"Mission", nav_pillars:"Pillars", nav_team:"Team", nav_kigali:"Kigali Mission ↗", nav_membership:"Membership", nav_contact:"Contact", nav_cta:"Become a member",
+    ph_kicker:"RACCA Membership",
+    ph_h1:"Join the <em>Canada–Caribbean–Africa</em> corridor.",
+    ph_p:"Three membership streams — institutional, entrepreneurial and executive-level — designed to connect decision-makers, businesses and investors to concrete opportunities across the three continents.",
+    qn1:"Institutions &amp; Strategic Partners", qn2:"Business &amp; Entrepreneurs", qn3:"Leaders Circle",
+    per_year:"/ year", tag_structuring:"Structuring role", tag_popular:"Most complete", t_cta:"Become a member",
+
+    s1_kicker:"Institutional stream", s1_heading:"Institutions &amp; Strategic Partners",
+    s1_desc:"This stream brings together public institutions, governmental bodies, and international organizations committed to strengthening economic relations between Canada, the Caribbean, and Africa.",
+    s1_a1:"Embassies &amp; High Commissions", s1_a2:"Consulates", s1_a3:"Governments &amp; public agencies", s1_a4:"International organizations",
+    s1_a5:"Chambers of commerce", s1_a6:"Economic development agencies", s1_a7:"Universities &amp; research centers", s1_a8:"Multilateral financial institutions",
+
+    t_inst_name:"Institutional", t_inst_desc:"Designed for active participation in the RACCA ecosystem.",
+    t_inst_b1:"Participation in diplomatic and economic roundtables", t_inst_b2:"Access to official economic missions",
+    t_inst_b3:"VIP invitations to RACCA events", t_inst_b4:"Institutional visibility across RACCA platforms",
+    t_inst_b5:"Opportunity to present programs and initiatives", t_inst_b6:"Access to qualified member companies",
+    t_inst_b7:"Participation in sector-based working groups",
+
+    t_strat_name:"Strategic Partner", t_strat_desc:"For institutions seeking a structuring role within the RACCA economic ecosystem.",
+    t_strat_includes:"Additional to Institutional benefits:",
+    t_strat_b1:"Priority access to RACCA partnerships", t_strat_b2:"Co-development of economic initiatives and projects",
+    t_strat_b3:"Enhanced presence in official delegations", t_strat_b4:"Speaking opportunities at major events",
+    t_strat_b5:"Premium visibility across RACCA communications", t_strat_b6:"Privileged access to strategic roundtables",
+    t_strat_b7:"Participation in multi-country structured projects",
+
+    s2_kicker:"Business stream", s2_heading:"Business &amp; Entrepreneurs",
+    s2_desc:"This stream connects businesses and entrepreneurs to concrete growth opportunities across Canada, the Caribbean, and Africa.",
+
+    t_entre_name:"Entrepreneur", t_entre_audience:"Self-employed professionals, consultants, startups", t_entre_desc:"Essential access to the network.",
+    t_entre_b1:"Access to the RACCA network", t_entre_b2:"Participation in webinars and training sessions", t_entre_b3:"Member directory access",
+    t_entre_b4:"Discounted event rates", t_entre_b5:"Basic visibility within the ecosystem",
+
+    t_biz_name:"Business", t_biz_audience:"SMEs", t_biz_desc:"Structured business development access.",
+    t_biz_includes:"Includes Entrepreneur benefits, plus:",
+    t_biz_b1:"Business profile in the RACCA directory", t_biz_b2:"Participation in targeted networking activities",
+    t_biz_b3:"Introductions to strategic partners", t_biz_b4:"Access to selected investor opportunities",
+    t_biz_b5:"Priority access to trade missions",
+
+    t_prem_name:"Premium Business", t_prem_audience:"Large companies and investors", t_prem_desc:"Strategic and international access.",
+    t_prem_includes:"Includes Business benefits, plus:",
+    t_prem_b1:"Annual strategic meetings", t_prem_b2:"Personalized matchmaking opportunities",
+    t_prem_b3:"Increased visibility across RACCA platforms", t_prem_b4:"Invitations to closed-door roundtables",
+    t_prem_b5:"Priority access to international delegations", t_prem_b6:"Opportunity to speak as a panelist or speaker",
+
+    s3_badge:"Invitation only", s3_kicker:"Leaders Circle", s3_heading:"RACCA Leaders Circle",
+    s3_desc:"An exclusive circle bringing together leading economic and financial actors engaged in the development of Canada–Caribbean–Africa business corridors. This level represents the highest tier of influence and decision-making within RACCA.",
+    s3_target_h:"Target members",
+    s3_t1:"Multinational corporations", s3_t2:"Banks and financial institutions", s3_t3:"Law firms and strategic advisory firms",
+    s3_t4:"Investment and venture capital funds", s3_t5:"Mining and energy companies",
+    s3_t6:"Telecommunications and infrastructure companies", s3_t7:"Transport and logistics companies", s3_t8:"Major economic institutions",
+    s3_benefits_h:"Exclusive benefits",
+    s3_b1:"Private meetings with international delegations", s3_b2:"Direct access to public and economic decision-makers",
+    s3_b3:"Positioning as a key partner within the RACCA ecosystem", s3_b4:"Participation in a strategic advisory council",
+    s3_b5:"Co-organization of major events", s3_b6:"High-level branding visibility within RACCA institutional communications",
+    s3_b7:"Priority access to high-impact investment opportunities", s3_b8:"Participation in closed-door economic decision-making roundtables",
+    s3_cta:"Request an invitation",
+
+    pos_kicker:"RACCA positioning",
+    pos_quote:"RACCA positions itself as a strategic bridge between Canada, the Caribbean, and Africa, integrating economic diplomacy, business development, and direct access to international markets. It provides a structured ecosystem where institutions, businesses, and investors can transform international relations into concrete economic opportunities.",
+
+    footer_tagline:"An economic corridor linking Canada, the Caribbean and Africa — designed for impact, built on trust.",
+    footer_nav:"Navigation", footer_contact:"Contact", footer_location:"Montreal, Canada",
+    footer_rights:"All rights reserved", footer_signature:"Designed for impact. Built on trust."
+  }
+};
+
+function setLang(lang){
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    const val = translations[lang] && translations[lang][key];
+    if(val !== undefined) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-lang-btn]').forEach(b=>b.classList.toggle('active', b.getAttribute('data-lang-btn')===lang));
+  const t = translations[lang];
+  if(t && t.meta_title) document.title = t.meta_title;
+  if(t && t.meta_desc){ const m = document.querySelector('meta[name="description"]'); if(m) m.setAttribute('content', t.meta_desc); }
+  try{ localStorage.setItem('racca-lang', lang); }catch(e){}
+}
+(function(){
+  let saved = 'fr';
+  try{ saved = localStorage.getItem('racca-lang') || 'fr'; }catch(e){}
+  setLang(saved);
+})();
+
+/* ---------- Mobile menu ---------- */
+const burgerBtn = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+burgerBtn.addEventListener('click', ()=>{
+  const open = mobileMenu.classList.toggle('open');
+  burgerBtn.setAttribute('aria-expanded', open);
+});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ mobileMenu.classList.remove('open'); burgerBtn.setAttribute('aria-expanded','false'); }));
+
+/* ---------- Scroll progress + header shadow ---------- */
+const bar = document.getElementById('scrollbar');
+const head = document.getElementById('siteHeader');
+window.addEventListener('scroll', ()=>{
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  if(bar) bar.style.width = pct + '%';
+  if(head) head.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive:true });
+
+/* ---------- Reveal on scroll ---------- */
+const ro = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){ setTimeout(()=> e.target.classList.add('visible'), i*70); ro.unobserve(e.target); }
+  });
+}, { threshold:.1 });
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

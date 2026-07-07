@@ -164,6 +164,7 @@
       <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
       <a href="index.html#team" data-i18n="nav_team">Équipe</a>
       <a href="mission-kigali.html" class="kigali" data-i18n="nav_kigali">Mission Kigali ↗</a>
+      <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
       <a href="contact.html" class="active" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="head-right">
@@ -182,6 +183,7 @@
       <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
       <a href="index.html#team" data-i18n="nav_team">Équipe</a>
       <a href="mission-kigali.html" data-i18n="nav_kigali">Mission Kigali ↗</a>
+      <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
       <a href="contact.html" data-i18n="nav_contact">Contact</a>
     </div>
   </div>
@@ -221,7 +223,11 @@
 
   <div class="form-card reveal">
     <h2 data-i18n="form_h2">Envoyez-nous votre message</h2>
-    <form id="contact-form" novalidate>
+    <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="contact">
+      <p style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+        <label>Ne pas remplir si vous êtes humain : <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
       <div class="form-row">
         <div class="field">
           <label for="full-name" data-i18n="f_name">Nom complet<span class="req">*</span></label>
@@ -265,6 +271,7 @@
       </div>
       <div class="form-msg" id="msg-success" data-i18n="f_success">Message envoyé — nous vous répondrons dans les 48 heures.</div>
       <div class="form-msg" id="msg-error" style="border-color:var(--gold); background:rgba(212,160,23,.08);" data-i18n="f_error">Veuillez remplir tous les champs obligatoires.</div>
+      <div class="form-msg" id="msg-network-error" style="border-color:var(--gold); background:rgba(212,160,23,.08);" data-i18n="f_error_network">Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous écrire directement à info@racca.ca.</div>
     </form>
   </div>
 </div>
@@ -285,6 +292,7 @@
         <a href="index.html#pillars" data-i18n="nav_pillars">Piliers</a>
         <a href="index.html#team" data-i18n="nav_team">Équipe</a>
         <a href="mission-kigali.html" data-i18n="nav_kigali">Mission Kigali</a>
+        <a href="membership.html" data-i18n="nav_membership">Adhésion</a>
         <a href="contact.html" data-i18n="nav_contact">Contact</a>
       </div>
       <div class="foot-col">
@@ -326,7 +334,7 @@
 const translations = {
   fr: {
     meta_title:"Contact | RACCA",
-    nav_mission:"Mission", nav_pillars:"Piliers", nav_team:"Équipe", nav_kigali:"Mission Kigali ↗", nav_contact:"Contact",
+    nav_mission:"Mission", nav_pillars:"Piliers", nav_team:"Équipe", nav_kigali:"Mission Kigali ↗", nav_membership:"Adhésion", nav_contact:"Contact",
     ph_kicker:"Nous joindre", ph_h1:"Parlons de votre prochain corridor.",
     ph_p:"Pour toute demande relative à la mission économique de Kigali, aux partenariats institutionnels ou à l'adhésion RACCA.",
     info_email:"Courriel", info_phone:"Téléphone", info_phone_sub:"Montréal, Canada · GMT-5",
@@ -342,13 +350,14 @@ const translations = {
     f_submit:"Envoyer le message", f_response:"Réponse sous 48h ouvrables",
     f_success:"Message envoyé — nous vous répondrons dans les 48 heures.",
     f_error:"Veuillez remplir tous les champs obligatoires.",
+    f_error_network:"Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous écrire directement à info@racca.ca.",
     footer_tagline:"Un corridor économique entre le Canada, les Caraïbes et l'Afrique — conçu pour l'impact, bâti sur la confiance.",
     footer_nav:"Navigation", footer_contact:"Contact", footer_location:"Montréal, Canada",
     footer_rights:"Tous droits réservés", footer_signature:"Conçu pour l'impact. Bâti sur la confiance."
   },
   en: {
     meta_title:"Contact | RACCA",
-    nav_mission:"Mission", nav_pillars:"Pillars", nav_team:"Team", nav_kigali:"Kigali Mission ↗", nav_contact:"Contact",
+    nav_mission:"Mission", nav_pillars:"Pillars", nav_team:"Team", nav_kigali:"Kigali Mission ↗", nav_membership:"Membership", nav_contact:"Contact",
     ph_kicker:"Get in touch", ph_h1:"Let's talk about your next corridor.",
     ph_p:"For any inquiry regarding the Kigali economic mission, institutional partnerships, or RACCA membership.",
     info_email:"Email", info_phone:"Phone", info_phone_sub:"Montreal, Canada · GMT-5",
@@ -364,6 +373,7 @@ const translations = {
     f_submit:"Send message", f_response:"Response within 48 business hours",
     f_success:"Message sent — we will respond within 48 hours.",
     f_error:"Please fill in all required fields.",
+    f_error_network:"Something went wrong while sending your message. Please try again or email us directly at info@racca.ca.",
     footer_tagline:"An economic corridor linking Canada, the Caribbean and Africa — designed for impact, built on trust.",
     footer_nav:"Navigation", footer_contact:"Contact", footer_location:"Montreal, Canada",
     footer_rights:"All rights reserved", footer_signature:"Designed for impact. Built on trust."
@@ -413,15 +423,18 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
 document.getElementById('contact-form').addEventListener('submit', function(e){
   e.preventDefault();
+  const form = document.getElementById('contact-form');
   const name = document.getElementById('full-name').value.trim();
   const email = document.getElementById('email').value.trim();
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value.trim();
   const msgSuccess = document.getElementById('msg-success');
   const msgError = document.getElementById('msg-error');
+  const msgNetworkError = document.getElementById('msg-network-error');
   const btn = document.getElementById('submit-btn');
   msgSuccess.style.display = 'none';
   msgError.style.display = 'none';
+  msgNetworkError.style.display = 'none';
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!name || !email || !emailRegex.test(email) || !subject || !message){
     msgError.style.display = 'block';
@@ -429,12 +442,25 @@ document.getElementById('contact-form').addEventListener('submit', function(e){
     return;
   }
   btn.disabled = true; btn.style.opacity = '0.7';
-  setTimeout(()=>{
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  })
+  .then((res)=>{
+    if(!res.ok) throw new Error('Network response was not ok');
     msgSuccess.style.display = 'block';
     msgSuccess.scrollIntoView({ behavior:'smooth', block:'nearest' });
-    document.getElementById('contact-form').reset();
+    form.reset();
+  })
+  .catch(()=>{
+    msgNetworkError.style.display = 'block';
+    msgNetworkError.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  })
+  .finally(()=>{
     btn.disabled = false; btn.style.opacity = '1';
-  }, 800);
+  });
 });
 </script>
 </body>
